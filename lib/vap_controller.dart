@@ -2,20 +2,23 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 
 class VapController {
-  static const MethodChannel _channel =
-      const MethodChannel('flutter_vap_controller');
+  late MethodChannel _channel;
+
+  void createChannel(id) {
+    _channel = MethodChannel('flutter_vap_controller${id}');
+  }
 
   /// return: play error:       {"status": "failure", "errorMsg": ""}
   ///         play complete:    {"status": "complete"}
-  static Future<Map<dynamic, dynamic>?> playPath(String path) async {
+  Future<Map<dynamic, dynamic>?> playPath(String path) async {
     return _channel.invokeMethod('playPath', {"path": path});
   }
 
-  static Future<Map<dynamic, dynamic>?> playAsset(String asset) {
+  Future<Map<dynamic, dynamic>?> playAsset(String asset) {
     return _channel.invokeMethod('playAsset', {"asset": asset});
   }
 
-  static stop() {
+  stop() {
     _channel.invokeMethod('stop');
   }
 }

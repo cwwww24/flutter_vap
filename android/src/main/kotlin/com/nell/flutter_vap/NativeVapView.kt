@@ -62,7 +62,7 @@ internal class NativeVapView(binaryMessenger: BinaryMessenger, context: Context?
             }
 
         })
-        channel = MethodChannel(binaryMessenger, "flutter_vap_controller")
+        channel = MethodChannel(binaryMessenger, "flutter_vap_controller${id}")
         channel.setMethodCallHandler(this)
     }
 
